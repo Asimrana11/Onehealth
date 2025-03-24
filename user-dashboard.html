@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Patient!</h1>
+        <div class="dashboard-section">
+            <h2>Book an Appointment</h2>
+            <form id="appointmentForm">
+                <label for="doctor">Select Doctor:</label>
+                <select id="doctor" name="doctor" required>
+                    <option value="dr_smith">Dr. Smith</option>
+                    <option value="dr_jones">Dr. Jones</option>
+                    <option value="dr_lee">Dr. Lee</option>
+                </select>
+
+                <label for="date">Appointment Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Appointment Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="reason">Reason for Appointment:</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea>
+
+                <button type="submit" class="btn">Book Appointment</button>
+            </form>
+            <p id="appointmentMessage" class="message"></p>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Your Test Results</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Date</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Results will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Sample test results data
+        const testResults = [
+            { testName: "Blood Test", date: "2023-10-01", result: "Normal" },
+            { testName: "X-Ray", date: "2023-10-05", result: "No issues found" },
+            { testName: "Urine Test", date: "2023-10-10", result: "Pending" }
+        ];
+
+        // Function to display test results
+        function displayResults() {
+            const tbody = document.querySelector("#resultsTable tbody");
+            tbody.innerHTML = ""; // Clear existing rows
+
+            testResults.forEach(result => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${result.testName}</td>
+                    <td>${result.date}</td>
+                    <td>${result.result}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Handle appointment booking
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const reason = document.getElementById('reason').value;
+
+            // Simulate appointment booking
+            document.getElementById('appointmentMessage').textContent = 
+                `Appointment booked with ${doctor} on ${date} at ${time}. Reason: ${reason}`;
+        });
+
+        // Display results when the page loads
+        displayResults();
+    </script>
+</body>
+</html>
