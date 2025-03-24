@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Healthcare System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <p id="errorMessage" class="error"></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Hardcoded usernames and passwords
+            const users = {
+                'doctor1': '1111',
+                'nurse1': '1111',
+                'user1': '1111'
+            };
+
+            if (users[username] && users[username] === password) {
+                alert(`Welcome, ${username}!`);
+                // Redirect to a dashboard or specific page based on user role
+                if (username === 'doctor1') {
+                    window.location.href = 'doctor_dashboard.html';
+                } else if (username === 'nurse1') {
+                    window.location.href = 'nurse_dashboard.html';
+                } else if (username === 'user1') {
+                    window.location.href = 'patient_dashboard.html';
+                }
+            } else {
+                document.getElementById('errorMessage').textContent = 'Invalid username or password.';
+            }
+        });
+    </script>
+</body>
+</html>
